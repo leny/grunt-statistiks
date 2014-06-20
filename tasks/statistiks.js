@@ -14,7 +14,38 @@ chalk = require("chalk");
 table = require("text-table");
 
 module.exports = function(grunt) {
-  return grunt.registerMultiTask("statistiks", "Get statistics about files in project (lines, words, …)", function() {
-    return grunt.log.writeln("Coming soon: statistiks task.");
+  return grunt.registerMultiTask("statistiks", "Get statistics about files in project (lines, characters, …)", function() {
+    var iCharsCount, iFilesCount, iFoldersCount, iLinesCount, oOptions;
+    oOptions = this.options({
+      countEmptyLines: false,
+      trimLines: true
+    });
+    iFoldersCount = 0;
+    iFilesCount = 0;
+    iLinesCount = 0;
+    iCharsCount = 0;
+    this.filesSrc.forEach(function(sFilePath) {
+      if (!grunt.file.exists(sFilePath)) {
+        return;
+      }
+      if (grunt.file.isDir(sFilePath)) {
+        ++iFoldersCount;
+        return;
+      }
+      if (grunt.file.isFile(sFilePath)) {
+        ++iFilesCount;
+        return grunt.file.read(sFilePath).split(/\r*\n/).map(function(sLine) {
+          if (oOptions.countEmptyLines === false && sLine.trim().length === 0) {
+            return;
+          }
+          ++iLinesCount;
+          return iCharsCount += oOptions.trimLines ? sLine.trim().length : sLine.length;
+        });
+      }
+    });
+    grunt.log.write("" + iFoldersCount + " folder" + (iFoldersCount > 1 ? 's' : '') + ", ");
+    grunt.log.write("" + iFilesCount + " file" + (iFilesCount > 1 ? 's' : '') + ", ");
+    grunt.log.write("" + iLinesCount + " line" + (iLinesCount > 1 ? 's' : '') + ", ");
+    return grunt.log.write("" + iCharsCount + " character" + (iCharsCount > 1 ? 's' : ''));
   });
 };
