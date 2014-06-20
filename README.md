@@ -2,7 +2,7 @@
 
 ![NPM version](http://img.shields.io/npm/v/grunt-statistiks.svg) ![Dependency Status](https://david-dm.org/leny/grunt-statistiks.svg) ![Downloads counter](http://img.shields.io/npm/dm/grunt-statistiks.svg)
 
-> Get statistics about files in project (lines, words, …)
+> Get statistics about files in project (lines, characters, …)
 
 * * *
 

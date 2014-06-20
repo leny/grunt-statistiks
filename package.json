@@ -1,7 +1,7 @@
 {
   "name": "grunt-statistiks",
   "version": "0.0.1",
-  "description": "Get statistics about files in project (lines, words, …)",
+  "description": "Get statistics about files in project (lines, characters, …)",
   "keywords": [
     "gruntplugin",
     "stats",
