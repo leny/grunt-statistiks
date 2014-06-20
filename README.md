@@ -24,43 +24,47 @@ grunt.loadNpmTasks('grunt-statistiks');
 
 ## The "statistiks" task
 
-### Overview
-
 In your project's Gruntfile, add a section named `statistiks` to the data object passed into `grunt.initConfig()`.
 
-```js
-grunt.initConfig({
-  statistiks: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-});
-```
+### Minimal usage
 
-### Options
-
-_(Coming soon)_
-
-### Usage Examples
-
-#### Default Options
-
-In this example, the default options are used to shows the *TODO*, *FIXME* and *NOTE* marks founded in the given files.
+The minimal usage of **grunt-statistics** will returns you the count of folders, files, non-empty lines and characters (from trimmed lines).
 
 ```js
-grunt.initConfig({
-  statistiks: {
-    options: {},
-    src: [
-      'test/*'
-    ],
-  },
-});
+statistiks: {
+  src: [
+    'test/*'
+  ]
+}
 ```
+
+### Usage with all available options
+
+```js
+statistiks: {
+  options: {
+    countEmptyLines: false,
+    trimLines: true
+  },
+  src: [
+    'test/*'
+  ]
+}
+```
+
+#### Options
+
+##### countEmptyLines
+Type: `Boolean`  
+Default: `false`  
+
+Set to `true` to count empty lines in total lines count.
+
+##### trimLines
+Type: `Boolean`  
+Default: `true`  
+
+By default, all *non-empty* lines are trimmed before characters counting. Set to `false` to avoid trim.
 
 ## Contributing
 
@@ -69,4 +73,13 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
-* **2014/06/21** : Project starting
+* **2014/06/21** : 0.1.0 (first release)
+
+### TODO
+
+* [ ] Add an option to reject binary files from counting
+* [ ] Add an option to reject comment from code-files
+
+## License
+Copyright (c) 2014 Leny  
+Licensed under the MIT license.
