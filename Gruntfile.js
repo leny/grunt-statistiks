@@ -42,10 +42,13 @@ module.exports = function(grunt) {
         ]
       },
       custom_options: {
-        options: {},
+        options: {
+          countEmptyLines: true,
+          trimLines: false
+        },
         src: [
           "test/*"
-        ],
+        ]
       },
     },
 
