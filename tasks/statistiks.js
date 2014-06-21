@@ -18,7 +18,8 @@ module.exports = function(grunt) {
     var iCharsCount, iFilesCount, iFoldersCount, iLinesCount, oOptions;
     oOptions = this.options({
       countEmptyLines: false,
-      trimLines: true
+      trimLines: true,
+      countFolders: false
     });
     iFoldersCount = 0;
     iFilesCount = 0;
@@ -28,7 +29,7 @@ module.exports = function(grunt) {
       if (!grunt.file.exists(sFilePath)) {
         return;
       }
-      if (grunt.file.isDir(sFilePath)) {
+      if (oOptions.countFolders && grunt.file.isDir(sFilePath)) {
         ++iFoldersCount;
         return;
       }
@@ -43,7 +44,9 @@ module.exports = function(grunt) {
         });
       }
     });
-    grunt.log.write("" + iFoldersCount + " folder" + (iFoldersCount > 1 ? 's' : '') + ", ");
+    if (oOptions.countFolders) {
+      grunt.log.write("" + iFoldersCount + " folder" + (iFoldersCount > 1 ? 's' : '') + ", ");
+    }
     grunt.log.write("" + iFilesCount + " file" + (iFilesCount > 1 ? 's' : '') + ", ");
     grunt.log.write("" + iLinesCount + " line" + (iLinesCount > 1 ? 's' : '') + ", ");
     return grunt.log.write("" + iCharsCount + " character" + (iCharsCount > 1 ? 's' : ''));

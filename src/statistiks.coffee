@@ -17,6 +17,7 @@ module.exports = ( grunt ) ->
         oOptions = @options
             countEmptyLines: no
             trimLines: yes
+            countFolders: no
 
         iFoldersCount = 0
         iFilesCount = 0
@@ -26,7 +27,7 @@ module.exports = ( grunt ) ->
         @filesSrc
             .forEach ( sFilePath ) ->
                 return unless grunt.file.exists sFilePath
-                if grunt.file.isDir sFilePath
+                if oOptions.countFolders and grunt.file.isDir sFilePath
                     ++iFoldersCount
                     return
                 if grunt.file.isFile sFilePath
@@ -39,7 +40,7 @@ module.exports = ( grunt ) ->
                             ++iLinesCount
                             iCharsCount += if oOptions.trimLines then sLine.trim().length else sLine.length
 
-        grunt.log.write "#{ iFoldersCount } folder#{ if iFoldersCount > 1 then 's' else '' }, "
+        grunt.log.write "#{ iFoldersCount } folder#{ if iFoldersCount > 1 then 's' else '' }, " if oOptions.countFolders
         grunt.log.write "#{ iFilesCount } file#{ if iFilesCount > 1 then 's' else '' }, "
         grunt.log.write "#{ iLinesCount } line#{ if iLinesCount > 1 then 's' else '' }, "
         grunt.log.write "#{ iCharsCount } character#{ if iCharsCount > 1 then 's' else '' }"

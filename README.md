@@ -44,7 +44,8 @@ statistiks: {
 statistiks: {
   options: {
     countEmptyLines: false,
-    trimLines: true
+    trimLines: true,
+    countFolders: no
   },
   src: [
     'test/*'
@@ -65,6 +66,12 @@ Type: `Boolean`
 Default: `true`  
 
 By default, all *non-empty* lines are trimmed before characters counting. Set to `false` to avoid trim.
+
+##### countFolders
+Type: `Boolean`  
+Default: `false`  
+
+Set to `true` to count folders.
 
 ## Contributing
 
