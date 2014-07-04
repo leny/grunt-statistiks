@@ -62,6 +62,10 @@ module.exports = ( grunt ) ->
                 src: [
                     "test/*"
                 ]
+            no_dest:
+                options:
+                    countEmptyLines: yes
+                    trimLines: no
 
     grunt.loadTasks "tasks"
 
