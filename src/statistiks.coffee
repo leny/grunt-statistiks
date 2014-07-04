@@ -10,10 +10,19 @@
 
 chalk = require "chalk"
 table = require "text-table"
+( spinner = require "simple-spinner" )
+    .change_sequence [
+        "◓"
+        "◑"
+        "◒"
+        "◐"
+    ]
 
 module.exports = ( grunt ) ->
 
     grunt.registerMultiTask "statistiks", "Get statistics about files in project (lines, characters, …)", ->
+        spinner.start 50
+
         oOptions = @options
             countEmptyLines: no
             trimLines: yes
@@ -39,6 +48,8 @@ module.exports = ( grunt ) ->
                             return if oOptions.countEmptyLines is no and sLine.trim().length is 0
                             ++iLinesCount
                             iCharsCount += if oOptions.trimLines then sLine.trim().length else sLine.length
+
+        spinner.stop()
 
         grunt.log.write "#{ iFoldersCount } folder#{ if iFoldersCount > 1 then 's' else '' }, " if oOptions.countFolders
         grunt.log.write "#{ iFilesCount } file#{ if iFilesCount > 1 then 's' else '' }, "

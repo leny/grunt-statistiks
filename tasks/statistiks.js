@@ -7,15 +7,18 @@
  * Licensed under the MIT license.
  */
 "use strict";
-var chalk, table;
+var chalk, spinner, table;
 
 chalk = require("chalk");
 
 table = require("text-table");
 
+(spinner = require("simple-spinner")).change_sequence(["◓", "◑", "◒", "◐"]);
+
 module.exports = function(grunt) {
   return grunt.registerMultiTask("statistiks", "Get statistics about files in project (lines, characters, …)", function() {
     var iCharsCount, iFilesCount, iFoldersCount, iLinesCount, oOptions;
+    spinner.start(50);
     oOptions = this.options({
       countEmptyLines: false,
       trimLines: true,
@@ -44,6 +47,7 @@ module.exports = function(grunt) {
         });
       }
     });
+    spinner.stop();
     if (oOptions.countFolders) {
       grunt.log.write("" + iFoldersCount + " folder" + (iFoldersCount > 1 ? 's' : '') + ", ");
     }
