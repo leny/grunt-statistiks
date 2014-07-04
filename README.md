@@ -26,6 +26,8 @@ grunt.loadNpmTasks('grunt-statistiks');
 
 In your project's Gruntfile, add a section named `statistiks` to the data object passed into `grunt.initConfig()`.
 
+The "statistiks" task is coded to be used as MultiTask **or** as a simple task : if you don't define it in your grunt config, calling `grunt statistiks` will use the default options.
+
 ### Minimal usage
 
 The minimal usage of **grunt-statistics** will returns you the count of folders, files, non-empty lines and characters (from trimmed lines).
@@ -52,6 +54,10 @@ statistiks: {
   ]
 }
 ```
+
+#### Target
+
+If you omit target files, **grunt-statistiks** will use all the files in the project, excepting the files in `node_modules` folder.
 
 #### Options
 
@@ -80,6 +86,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+* **2014/07/05** : 0.2.0 (allow task to be runned as *simple* or *multi* task)
 * **2014/06/21** : 0.1.0 (first release)
 
 ### TODO
