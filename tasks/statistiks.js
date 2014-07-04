@@ -16,8 +16,9 @@ table = require("text-table");
 (spinner = require("simple-spinner")).change_sequence(["◓", "◑", "◒", "◐"]);
 
 module.exports = function(grunt) {
-  return grunt.registerMultiTask("statistiks", "Get statistics about files in project (lines, characters, …)", function() {
-    var iCharsCount, iFilesCount, iFoldersCount, iLinesCount, oOptions;
+  var statistiksTask;
+  statistiksTask = function() {
+    var iCharsCount, iFilesCount, iFoldersCount, iLinesCount, oOptions, _ref;
     spinner.start(50);
     oOptions = this.options({
       countEmptyLines: false,
@@ -28,7 +29,7 @@ module.exports = function(grunt) {
     iFilesCount = 0;
     iLinesCount = 0;
     iCharsCount = 0;
-    this.filesSrc.forEach(function(sFilePath) {
+    (((_ref = this.filesSrc) != null ? _ref.length : void 0) ? this.filesSrc : grunt.file.expand(["**", "!node_modules/**"])).forEach(function(sFilePath) {
       if (!grunt.file.exists(sFilePath)) {
         return;
       }
@@ -54,5 +55,10 @@ module.exports = function(grunt) {
     grunt.log.write("" + iFilesCount + " file" + (iFilesCount > 1 ? 's' : '') + ", ");
     grunt.log.write("" + iLinesCount + " line" + (iLinesCount > 1 ? 's' : '') + ", ");
     return grunt.log.write("" + iCharsCount + " character" + (iCharsCount > 1 ? 's' : ''));
-  });
+  };
+  if (grunt.config.data.statistiks) {
+    return grunt.registerMultiTask("statistiks", "Get statistics about files in project (lines, characters, …)", statistiksTask);
+  } else {
+    return grunt.registerTask("statistiks", "Get statistics about files in project (lines, characters, …)", statistiksTask);
+  }
 };

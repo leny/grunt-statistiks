@@ -20,7 +20,7 @@ table = require "text-table"
 
 module.exports = ( grunt ) ->
 
-    grunt.registerMultiTask "statistiks", "Get statistics about files in project (lines, characters, …)", ->
+    statistiksTask = ->
         spinner.start 50
 
         oOptions = @options
@@ -33,7 +33,7 @@ module.exports = ( grunt ) ->
         iLinesCount = 0
         iCharsCount = 0
 
-        @filesSrc
+        ( if @filesSrc?.length then @filesSrc else grunt.file.expand [ "**", "!node_modules/**" ] )
             .forEach ( sFilePath ) ->
                 return unless grunt.file.exists sFilePath
                 if oOptions.countFolders and grunt.file.isDir sFilePath
@@ -55,3 +55,8 @@ module.exports = ( grunt ) ->
         grunt.log.write "#{ iFilesCount } file#{ if iFilesCount > 1 then 's' else '' }, "
         grunt.log.write "#{ iLinesCount } line#{ if iLinesCount > 1 then 's' else '' }, "
         grunt.log.write "#{ iCharsCount } character#{ if iCharsCount > 1 then 's' else '' }"
+
+    if grunt.config.data.statistiks
+        grunt.registerMultiTask "statistiks", "Get statistics about files in project (lines, characters, …)", statistiksTask
+    else
+        grunt.registerTask "statistiks", "Get statistics about files in project (lines, characters, …)", statistiksTask
