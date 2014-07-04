@@ -41,8 +41,9 @@
     "text-table": "~0.2"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.10",
-    "grunt": "~0.4",
-    "grunt-contrib-coffee": "~0.10"
+    "grunt-contrib-coffee": "~0.10",
+    "grunt-coffeelint": "~0.0",
+    "matchdep": "~0.3",
+    "grunt": "~0.4.5"
   }
 }
