@@ -47,7 +47,7 @@ statistiks: {
   options: {
     countEmptyLines: false,
     trimLines: true,
-    countFolders: no
+    countFolders: false
   },
   src: [
     'test/*'
