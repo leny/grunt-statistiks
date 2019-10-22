@@ -1,6 +1,6 @@
 # grunt-statistiks
 
-![NPM version](http://img.shields.io/npm/v/grunt-statistiks.svg) ![Dependency Status](https://david-dm.org/leny/grunt-statistiks.svg) ![Downloads counter](http://img.shields.io/npm/dm/grunt-statistiks.svg)
+![NPM version](http://img.shields.io/npm/v/grunt-statistiks.svg) ![Dependency Status](https://david-dm.org/leny/grunt-statistiks.svg) ![Downloads counter](http://img.shields.io/npm/dm/grunt-statistiks.svg) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 > Get statistics about files in project (lines, characters, …)
 
